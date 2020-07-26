@@ -40,6 +40,21 @@ class TitlePolicy
         return $title->status ==1;
     }
 
+//    public function firstPrefer(User $user, Title $title)
+//    {
+//        $user_id= Auth::id();
+//
+//
+//        foreach($title->students as $student){
+//            echo $student->pivot->preferenceOrder;
+//        }
+//
+//        if($title->students()->user_id == $user_id && $title->students()->pivot->preferenceOrder !=1){
+//            return true;
+//        }
+
+//    }
+
 
 
 }

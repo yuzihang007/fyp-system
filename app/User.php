@@ -17,7 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username',  'password','firstname','lastname','middlename','expertise','email','role', 'created_at'
+        'username',  'password','firstname','lastname','middlename','expertise',
+        'email','role', 'created_at','preferenceOrder','user_id','title_id'
     ];
 
     /**
@@ -48,16 +49,32 @@ class User extends Authenticatable
     //学生申请和title的关联
     public function studentTitles()
     {
-        return $this->belongsToMany(Title::class,'application_student')->using(ApplicationStudent::class);
+        return $this->belongsToMany(Title::class,
+            'application_student',
+            'user_id',
+            'title_id')
+            ->withPivot(['user_id','title_id','preferenceOrder','project_title'])
+            ->withTimestamps();
     }
 
-    public function preference($preferenceOrder)
+//    public function preference($preferenceOrder)
+//    {
+//        return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',$preferenceOrder);
+//    }
+
+
+    // 学生和申请模型的关联
+    public function applicationInstance()
     {
-        return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',$preferenceOrder);
+        return $this->belongsTo(ApplicationStudent::class);
     }
 
 
 
-
+    //first choice
+    public function firstPrefer($user_id)
+    {
+        return $this->hasOne(ApplicationStudent::class)->where(['preferenceOrder'=>1,'user_id'=>$user_id]);
+    }
 
 }

@@ -12,7 +12,7 @@
     <div>
         <a href="{{'/waitForVetting'}}"><button >Passed Topic</button></a>
         <button >Waiting for vetting</button>
-        <button >waitting for adjusting</button>
+        <button >waiting for adjusting</button>
     </div>
 <div class="card">
     <div class="card-header bg-primary text-white">List of project title</div>

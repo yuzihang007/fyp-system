@@ -47,7 +47,20 @@
                             @csrf
 
 {{--                            @if(Auth::user()->preference($title->preferenceOrder = 3 && $title->preferenceOrder != 2 && $title->preferenceOrder != 3)->exists())--}}
-                            @if($title->checkFirst(Auth::id())->exists())
+{{--                            @foreach($title->students as $student)--}}
+{{--                            @if($student->firstPrefer(Auth::id())->exists())--}}
+   {{--如果学生的已经有题目的pre是1 就不会出现第一选项的按钮--}}
+
+{{--                            @foreach($title->students as $student)--}}
+{{--                            @can('firstPrefer',$student->pivot->preferenceOrder)--}}
+                                    <div class="form-check-inline">
+                                        <label for="titleMark1">
+                                            <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="1"  checked>
+                                            <label class="form-check-label" for="titleMark1">First choice</label>
+                                        </label>
+                                    </div>
+                                    <br/>
+
 
                                 <div class="form-check-inline">
                                     <label for="titleMark2">
@@ -64,36 +77,6 @@
                                     </label>
                                 </div>
                                 <br/>
-
-                            @else
-
-                                <div class="form-check-inline">
-                                    <label for="titleMark1">
-                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="1"  checked>
-                                        <label class="form-check-label" for="titleMark1">First choice</label>
-                                    </label>
-                                </div>
-                                <br/>
-
-                                <div class="form-check-inline">
-                                    <label for="titleMark2">
-                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="2" checked>
-                                        <label class="form-check-label" for="titleMark2">Second Choice</label>
-                                    </label>
-                                </div>
-                                <br/>
-
-                                <div class="form-check-inline">
-                                    <label for="titleMark3">
-                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="3" checked>
-                                        <label class="form-check-label" for="titleMark3">Third Choice</label>
-                                    </label>
-                                </div>
-                                <br/>
-
-
-                            @endif
-
 
 
 

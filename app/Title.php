@@ -21,7 +21,17 @@ class Title extends Model
     //学生申请和title的关联
     public function students()
     {
-        return $this->belongsToMany(User::class,'application_student')->using(ApplicationStudent::class);
+        return $this->belongsToMany(User::class,
+            'application_student',
+            'title_id',
+            'user_id')
+            ->withPivot(['preferenceOrder','user_id','title_id'])
+            ->withTimestamps();
+    }
+
+    public function applicationInstance()
+    {
+        return $this->belongsTo(ApplicationStudent::class);
     }
 
 
@@ -34,14 +44,22 @@ class Title extends Model
         return $this->hasOne(ApplicationStudent::class)->where('user_id',$user_id);
     }
 
-
-    public function checkFirst($user_id)
+    //first choice
+    public function firstPrefer($user_id)
     {
-        return $this->hasOne(ApplicationStudent::class)->where([
-            'user_id' => $user_id,
-            'preferenceOrder'=> 1
-        ]);
+        return $this->hasOne(ApplicationStudent::class)->where(['preferenceOrder'=>1,'user_id'=>$user_id]);
     }
+    //second choice
+    public function secondPrefer($user_id)
+    {
+        return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',2);
+    }
+    //third choice
+    public function thirdPrefer($user_id)
+    {
+        return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',3);
+    }
+
 
 
     public function titleSelections()

@@ -19,10 +19,11 @@ class StudentController extends Controller
 
 
     // topic list
-    public function titleIndex(Title $title)
+    public function titleIndex(Title $title, User $user)
     {
         $titles = Title::where('status',1)->orderBy('created_at','desc')->withCount('titleSelections')->paginate(3);
-        return view('student.titleList',compact('titles'));
+        $user = User::where(['application_student.user_id','==','users.id']);
+        return view('student.titleList',compact('titles','user'));
     }
 
 

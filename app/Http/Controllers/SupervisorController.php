@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\ApplicationStudent;
 use App\Title;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use const http\Client\Curl\AUTH_DIGEST;
 
 class SupervisorController extends Controller
 {
@@ -122,11 +124,25 @@ class SupervisorController extends Controller
     }
 
 
-    //student application list
-    public function applicationIndex()
+//    student application list
+//    public function applicationIndex(Title $title)
+//    {
+//        $user_id = auth()->user()->id;
+//        $user = User::find($user_id);
+//        return view('supervisor.applicationList')->with('titles', $user->titles);
+//    }
+
+    public function applicationIndex(ApplicationStudent $applicationStudent,Title $title)
+
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        return view('supervisor.applicationList')->with('titles', $user->titles);
+
+        $records=ApplicationStudent::all();
+        $titles=Title::all();
+//        where([
+//            'titles.user_id'=>'application_student.title_id'
+//        ]);
+        return view('supervisor.applicationList',compact('records'));
     }
+
+
 }
