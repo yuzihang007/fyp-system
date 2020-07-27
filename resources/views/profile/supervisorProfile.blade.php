@@ -22,7 +22,7 @@
                 </div>
 
                 <div>
-{{--                    <a href="{{'profile/update',\Illuminate\Support\Facades\Auth::user()->id}}">Edit</a>--}}
+                    <a href="{{url('supervisor/profile/edit')}}">Edit</a>
                 </div>
 
         </div>

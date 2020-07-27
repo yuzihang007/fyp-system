@@ -25,7 +25,7 @@ class Title extends Model
             'application_student',
             'title_id',
             'user_id')
-            ->withPivot(['preferenceOrder','user_id','title_id'])
+            ->withPivot(['preferenceOrder','user_id','title_id','allocationStatus','supervisorMarkStudent'])
             ->withTimestamps();
     }
 

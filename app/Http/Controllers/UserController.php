@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\Supervisor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,9 +24,9 @@ class UserController extends Controller
 
 
     // 学生profile更新页面
-    public function studentProfileEdit()
+    public function studentProfileEdit(Student $student)
     {
-        return view('profile.studentProfileEdit');
+        return view('profile.studentProfileEdit',compact('student'));
     }
 
 
@@ -51,8 +52,9 @@ class UserController extends Controller
 
 
 
-    public function profileUpdate()
+    public function supervisorProfileEdit(Supervisor $supervisor)
     {
         //
+        return view('profile.supervisorProfileEdit',compact('supervisor'));
     }
 }

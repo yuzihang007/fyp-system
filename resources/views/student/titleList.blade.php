@@ -47,7 +47,7 @@
 
                         <form method="POST" action="/title/{{$title->id}}/select">
                             @csrf
-                               @can('firstPrefer')
+
                                 <div class="form-check-inline">
                                     <label for="titleMark1">
                                         <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="1"  checked>
@@ -55,7 +55,7 @@
                                     </label>
                                 </div>
                                 <br/>
-                            @endcan
+
                                 <div class="form-check-inline">
                                     <label for="titleMark2">
                                         <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="2" checked>

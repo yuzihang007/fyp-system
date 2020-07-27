@@ -8,232 +8,128 @@
 @section('content')
 
 
-{{--        @foreach($data as $data)--}}
-
-{{--            <td> topic id:{{$data->topic_id}}{{$data->title_id}}</td>--}}
-{{--            <br>--}}
-{{--            <td> title: {{$data->project_title}}</td>--}}
-{{--            <br>--}}
-{{--            <td> suitable for: {{$data->suitable_for}}</td>--}}
-{{--            <br>--}}
-{{--            <td> Student Email: {{$data->email}}</td>--}}
-{{--            <br>--}}
-{{--            <td> student id: {{$data->user_id}}</td>--}}
-{{--            <br>--}}
-{{--            <td> Student name: {{$data->firstname}}  {{$data->lastname}}</td>--}}
-{{--            <br>--}}
-{{--            <td> Preference Order: {{$data->preferenceOrder}}</td>--}}
-{{--            <br>--}}
 
 
+        <div class="card">
+            <div class="card-header bg-primary text-white">Student Application</div>
+            <table class="table table-light table-striped table-hover ">
+                <thead>
+                <tr>
+                    <th>Application</th>
+                    <th>User_id</th>
+                    <th>Title_id</th>
+
+{{--                    <th>Topic ID</th>--}}
+{{--                    <th>Title</th>--}}
+{{--                    <th>Suitable for</th>--}}
+{{--                    <th>Student</th>--}}
+{{--                    <th>StudentNum</th>--}}
+{{--                    <th>Student Email</th>--}}
+{{--                    <th>Program</th>--}}
+                    <th>Choice Order</th>
+                    <th>Rate student</th>
+                    <th>Hired</th>
+
+                </tr>
+                </thead>
+
+
+                @foreach($applicationStudents as $applicationStudent)
+                    <tr>
+                        <td>{{$applicationStudent->id}}</td>
+                        <td>{{$applicationStudent->user_id}}</td>
+                        <th scope="row">{{$applicationStudent->title_id}}</th>
+                        <td>{{$applicationStudent->preferenceOrder}}</td>
+
+{{--                        <th scope="row">{{$data->topic_id}}{{$data->title_id}}</th>--}}
+{{--                        <td>{{$data->project_title}}</td>--}}
+{{--                        <td>{{$data->suitable_for}}</td>--}}
+{{--                        <td>{{$data->name}}</td>--}}
+{{--                        <td>{{$data->studentNumber}}</td>--}}
+{{--                        <td>{{$data->email}}</td>--}}
+{{--                        <td>{{$data->program}}</td>--}}
+{{--                        <td>{{$data->preferenceOrder}}</td>--}}
+
+                        <td>
+
+                            <form type="POST" action="/application/{{$applicationStudent->id}}/mark">
+                                @csrf
+                                <div class="form-check-inline">
+                                    <label for="titleMark2">
+                                        <input class="form-check-input" type="radio" name="supervisorMarkStudent" id="supervisorMarkStudent" value="-2" checked>
+                                        <label class="form-check-label" for="titleMark2">-2</label>
+                                    </label>
+                                </div>
+                                <br/>
+
+                                <div class="form-check-inline">
+                                    <label for="titleMark2">
+                                        <input class="form-check-input" type="radio" name="supervisorMarkStudent" id="supervisorMarkStudent" value="-1" checked>
+                                        <label class="form-check-label" for="titleMark2">-1</label>
+                                    </label>
+                                </div>
+                                <br/>
+
+
+                                <div class="form-check-inline">
+                                    <label for="titleMark2">
+                                        <input class="form-check-input" type="radio" name="supervisorMarkStudent" id="supervisorMarkStudent" value="0" checked>
+                                        <label class="form-check-label" for="titleMark2">0</label>
+                                    </label>
+                                </div>
+                                <br/>
+
+
+                                <div class="form-check-inline">
+                                    <label for="titleMark2">
+                                        <input class="form-check-input" type="radio" name="supervisorMarkStudent" id="supervisorMarkStudent" value="1" checked>
+                                        <label class="form-check-label" for="titleMark2">1</label>
+                                    </label>
+                                </div>
+                                <br/>
+
+
+                                <div class="form-check-inline">
+                                    <label for="titleMark2">
+                                        <input class="form-check-input" type="radio" name="supervisorMarkStudent" id="supervisorMarkStudent" value="2" checked>
+                                        <label class="form-check-label" for="titleMark2">2</label>
+                                    </label>
+                                </div>
+                                <br/>
+
+
+                                <button type="submit"  class="btn btn-info btn-default post-audit">Mark</button>
+
+                            </form>
+
+                        </td>
+
+                        <td>
+                            @if($applicationStudent->preferenceOrder==1)
+                                <button type="button"  class="btn btn-info btn-default hire-audit"
+                                        hire-id="{{$applicationStudent->id}}" hire-action-status="1" disabled="{{$applicationStudent->allocationStatus==1}}">Hire</button>
+                            @else
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+
+            </table>
+        </div>
+
+
+{{--        <!--fen ye-->--}}
+{{--        <div class="pagination justify-content-end">--}}
+{{--                            {{$data->render()}}--}}
+
+{{--        </div>--}}
 
 
 
-{{--            <td> {{$data->project_title}}</td>--}}
 
 
 
 
-
-{{--            user id :{{$record->user_id}}--}}
-{{--            user name: {{$record->usernamee}}--}}
-{{--            title id :{{$record->title_id}}--}}
-{{--            {{$record->preferenceOrder}}--}}
-{{--            {{$record->project_title}} --}}
-        @endforeach
-
-{{--    @foreach($records as $record)--}}
-
-{{--        user id :{{$record->user_id}}--}}
-{{--        user name: {{$record->usernamee}}--}}
-{{--        title id :{{$record->title_id}}--}}
-{{--        {{$record->preferenceOrder}}--}}
-{{--        {{$record->project_title}}--}}
-
-
-{{--       @foreach($titles as $title)--}}
-{{--           {{$title->project_title}}--}}
-{{--       @endforeach--}}
-
-{{--    @endforeach--}}
-
-
-
-{{--    <div class="card">--}}
-{{--        <div class="card-header bg-primary text-white">Student Application</div>--}}
-{{--        <table class="table table-light table-striped table-hover ">--}}
-{{--            <thead>--}}
-{{--            <tr>--}}
-{{--                <th>Topic ID</th>--}}
-{{--                <th>Title</th>--}}
-{{--                <th>Student</th>--}}
-{{--                <th>Student Email</th>--}}
-{{--                <th>Suitable for</th>--}}
-{{--                <th>Program</th>--}}
-{{--                <th>Choice Order</th>--}}
-{{--                <th>Rate student</th>--}}
-{{--                <th>Hired</th>--}}
-
-{{--            </tr>--}}
-{{--            </thead>--}}
-
-
-{{--            @foreach($titles as $title)--}}
-{{--                <tr>--}}
-{{--                    <th scope="row">{{$title->topic_id}}{{$title->id}}</th>--}}
-{{--                    <td>{{$title->project_title}}</td>--}}
-{{--                    <td>--}}
-{{--                        @foreach($title->suitable_for as $suitable_for)--}}
-{{--                            <li>{{$suitable_for}}</li>--}}
-{{--                        @endforeach--}}
-{{--                    </td>--}}
-
-{{--                    <td>--}}
-{{--                        @foreach($title->students as $student)--}}
-{{--                           <li>{{$student->firstname}}{{$student->lastname}}</li>--}}
-{{--                        @endforeach--}}
-{{--                    </td>--}}
-
-{{--                    <td>--}}
-{{--                        @foreach($title->students as $student)--}}
-{{--                        <li>{{$student->email}}</li>--}}
-{{--                        @endforeach--}}
-{{--                    </td>--}}
-
-{{--                    <td></td>--}}
-{{--                    <td>--}}
-{{--                        @foreach($title->students as $student)--}}
-{{--                            <li>{{$student->pivot->preferenceOrder}}</li>--}}
-{{--                        @endforeach--}}
-{{--                    </td>--}}
-{{--                    <td>--}}
-
-{{--                        <form>--}}
-{{--                            @csrf--}}
-{{--                            <div class="form-check-inline">--}}
-{{--                                <label for="titleMark2">--}}
-{{--                                    <input class="form-check-input" type="radio" name="markStudent" id="markStudent" value="-2" checked>--}}
-{{--                                    <label class="form-check-label" for="titleMark2">-2</label>--}}
-{{--                                </label>--}}
-{{--                            </div>--}}
-{{--                            <br/>--}}
-{{--                            <div class="form-check-inline">--}}
-{{--                                <label for="titleMark2">--}}
-{{--                                    <input class="form-check-input" type="radio" name="markStudent" id="markStudent" value="-1" checked>--}}
-{{--                                    <label class="form-check-label" for="titleMark2">-1</label>--}}
-{{--                                </label>--}}
-{{--                            </div>--}}
-{{--                        </form>--}}
-{{--                        <a href="{{url('title/detail',$title->id)}}">detail</a>--}}
-{{--                        @can('update',$title)--}}
-{{--                            <a href="/title/{{$title->id}}/edit">edit</a>--}}
-{{--                        @endcan()--}}
-{{--                        @can('delete',$title) <a href="/title/{{$title->id}}/delete">delete</a>@endcan--}}
-
-
-{{--                    </td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-
-{{--        </table>--}}
-{{--    </div>--}}
-
-
-{{--    <!--fen ye-->--}}
-{{--    <div class="pagination justify-content-end">--}}
-{{--                        {{$titles->render()}}--}}
-
-{{--    </div>--}}
-
-
-{{--<div class="card">--}}
-{{--    <div class="card-header bg-primary text-white">Student Application</div>--}}
-{{--    <table class="table table-light table-striped table-hover ">--}}
-{{--        <thead>--}}
-{{--        <tr>--}}
-{{--            <th>Topic ID</th>--}}
-{{--            <th>Title</th>--}}
-{{--            <th>Student</th>--}}
-{{--            <th>Student Email</th>--}}
-{{--            <th>Suitable for</th>--}}
-{{--            <th>Program</th>--}}
-{{--            <th>Choice Order</th>--}}
-{{--            <th>Rate student</th>--}}
-{{--            <th>Hired</th>--}}
-
-{{--        </tr>--}}
-{{--        </thead>--}}
-
-
-{{--        @foreach($users as $user)--}}
-{{--            <tr>--}}
-{{--                <th scope="row">--}}
-{{--                    @foreach($user->studentTitles as $sTitles)--}}
-{{--                        {{$sTitles->topic_id}}{{$sTitles->id}}--}}
-{{--                    @endforeach()--}}
-{{--                </th>--}}
-
-{{--                <td>--}}
-{{--                    @foreach($user->studentTitles as $sTitles)--}}
-{{--                        {{$sTitles->project_title}}--}}
-{{--                    @endforeach()--}}
-{{--                </td>--}}
-
-{{--                <td>{{$user->firstname}}</td>--}}
-
-{{--                <td>{{$user->email}}</td>--}}
-
-{{--                <td>--}}
-{{--                    @foreach($user->studentTitles as $sTitles)--}}
-{{--                        @foreach($sTitles->suitable_for as $suitable_for)--}}
-{{--                        <li>{{$suitable_for}}</li>--}}
-{{--                        @endforeach--}}
-{{--                    @endforeach--}}
-{{--                </td>--}}
-
-
-{{--                <td></td>--}}
-{{--                <td> @foreach($user->studentTitles as $sTitles)--}}
-{{--                        {{$sTitles->pivot->preferenceOrder}}--}}
-{{--                    @endforeach</td>--}}
-{{--                <td>--}}
-
-{{--                    <form>--}}
-{{--                        @csrf--}}
-{{--                        <div class="form-check-inline">--}}
-{{--                            <label for="titleMark2">--}}
-{{--                                <input class="form-check-input" type="radio" name="markStudent" id="markStudent" value="-2" checked>--}}
-{{--                                <label class="form-check-label" for="titleMark2">-2</label>--}}
-{{--                            </label>--}}
-{{--                        </div>--}}
-{{--                        <br/>--}}
-{{--                        <div class="form-check-inline">--}}
-{{--                            <label for="titleMark2">--}}
-{{--                                <input class="form-check-input" type="radio" name="markStudent" id="markStudent" value="-1" checked>--}}
-{{--                                <label class="form-check-label" for="titleMark2">-1</label>--}}
-{{--                            </label>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-{{--                    <a href="{{url('title/detail',$title->id)}}">detail</a>--}}
-{{--                    @can('update',$title)--}}
-{{--                        <a href="/title/{{$title->id}}/edit">edit</a>--}}
-{{--                    @endcan()--}}
-{{--                    @can('delete',$title) <a href="/title/{{$title->id}}/delete">delete</a>@endcan--}}
-
-
-{{--                </td>--}}
-{{--            </tr>--}}
-{{--        @endforeach--}}
-
-{{--    </table>--}}
-{{--</div>--}}
-
-
-{{--<!--fen ye-->--}}
-{{--<div class="pagination justify-content-end">--}}
-{{--    {{$users->render()}}--}}
-
-{{--</div>--}}
 
 
 @stop

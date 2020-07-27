@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class ApplicationStudent extends Pivot
 {
     //
-    protected $fillable = ['user_id','title_id','preferenceOrder'];
+    protected $fillable = ['user_id','title_id','preferenceOrder','allocationStatus','supervisorMarkStudent'];
 
 
 
@@ -25,9 +25,9 @@ class ApplicationStudent extends Pivot
         return $this->hasOne(Title::class);
     }
 
-//    public function student()
+//    public function studentApplication()
 //    {
-//        return $this->belongsTo(User::class);
+//        return $this->belongsTo(User::class,'user_id','id');
 //    }
 //
 //    public function title()

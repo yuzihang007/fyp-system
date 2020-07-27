@@ -53,7 +53,7 @@ class User extends Authenticatable
             'application_student',
             'user_id',
             'title_id')
-            ->withPivot(['user_id','title_id','preferenceOrder'])
+            ->withPivot(['user_id','title_id','preferenceOrder','allocationStatus','supervisorMarkStudent'])
             ->withTimestamps();
     }
 
@@ -62,7 +62,7 @@ class User extends Authenticatable
     // 学生和申请模型的关联
     public function applicationInstances()
     {
-        return $this->hasMany(ApplicationStudent::class);
+        return $this->belongsTo(ApplicationStudent::class);
     }
 
     //关联，一个用户有一个学生profile

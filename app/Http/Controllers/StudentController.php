@@ -38,6 +38,9 @@ class StudentController extends Controller
         return redirect('student/titleIndex');
     }
 
+
+
+
     //cancel selection
 
 //    public function unSelect(Title $title)

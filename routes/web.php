@@ -19,6 +19,20 @@ Route::get('/', function () {
     return view('login.index');
 });
 
+
+//Route::get('/', function () {
+//
+//$data = DB::table('application_student')
+//    ->join('titles','application_student.title_id','=','titles.id')
+//    ->join('students','students.user_id','=','application_student.user_id')
+//    ->get();
+//////
+//dd($data);
+//
+//
+//});
+
+
 //Route::get('/', function () {
 //    $user=Auth::user();
 //    $applications = DB::table('application_student')
@@ -35,7 +49,7 @@ Route::get('/', function () {
 //
 //});
 
-//创建管理员账户
+////创建管理员账户
 //Route::get('/', function () {
 //    \App\User::create([
 //        'username' => 'admin',
@@ -95,7 +109,6 @@ Route::group(['middleware'=>['student','auth']],function(){
     Route::get('/student/titleIndex','StudentController@titleIndex');
     //TODO:student route
     Route::post('/student/myApplication','StudentController@application');
-
     //topic select
     Route::post('/title/{title}/select','StudentController@titleSelect');
 
@@ -123,6 +136,10 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
     Route::get('/title/waitForVetting','ModuleOwnerController@waitForVetting');
 });
 
+    Route::any('/application/{applicationStudent}/mark','SupervisorController@markStudent');
+    Route::post('/application/{applicationStudent}/status','SupervisorController@hire');
+
+
 
 
 
@@ -138,15 +155,21 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
     //profile ：学生profile详情页面  personal information page of student
     Route::get('student/profile/{id}','UserController@studentProfile');
 
-    //profile： 学生profile修改页面 TODO:
+    //
+
+
+
+
+//    //profile： 学生profile修改页面 TODO:
     Route::get('student/profile/edit','UserController@studentProfileEdit');
 
 
 
 
 
-//    //profile ：教师profile详情页面
-//    Route::get('supervisor/profile/{id}','UserController@supervisorProfile');
+    //profile ：教师profile详情页面
+    Route::get('supervisor/profile/{id}','UserController@supervisorProfile');
+    Route::get('supervisor/profile/edit','UserController@supervisorProfileEdit');
 //
 ////profile 创建页面 TODO:
 //    Route::get('/user/create','UserController@list');
