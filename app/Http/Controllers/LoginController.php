@@ -22,7 +22,7 @@ class LoginController extends Controller
 
         $this->Validate($request,[
             'username'=>'required',
-            'password'=>'required|min:6',
+            'password'=>'required|min:8',
         ]);
         //逻辑
         $user = array(
@@ -45,25 +45,14 @@ class LoginController extends Controller
 
                 default:
                     break;}
-//
-//            if(auth()->user()->role==1){
-//                return redirect('/admin/home');
-//            }elseif (auth()->user()->role ==2){
-//                return redirect('/assessor/home');
-//            }elseif (auth()->user()->role ==3){
-//                return redirect('/moduleOwner/home');
-//            }elseif (auth()->user()->role == 4){
-//                return redirect('student/home');
-//            }elseif (auth()->user()->role ==5){
-//                return redirect('supervisor/home');
-//            }
+
             return redirect('/');
         }
         //渲染
         return redirect()->back()->withErrors("username and password are not match");
     }
 
-
+        //logout
     public function logout()
     {
         Auth::logout();

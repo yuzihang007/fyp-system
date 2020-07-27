@@ -16,14 +16,24 @@ class ApplicationStudent extends Pivot
     //获取模型中的学生用户
     public function student()
     {
-        return $this->hasOne(User::class,'id','user_id');
+        return $this->hasOne(User::class);
     }
 
     //被选择的title
     public function title()
     {
-        return $this->hasOne(Title::class,'id','title_id');
+        return $this->hasOne(Title::class);
     }
+
+//    public function student()
+//    {
+//        return $this->belongsTo(User::class);
+//    }
+//
+//    public function title()
+//    {
+//        return $this->belongsTo(Title::class);
+//    }
 
 
 }

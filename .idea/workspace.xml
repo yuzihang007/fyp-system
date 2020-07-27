@@ -21,20 +21,39 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f818ed4-2e8e-4034-8e7a-0d031548235c" name="Default Changelist" comment="update">
+      <change afterPath="$PROJECT_DIR$/resources/views/profile/studentProfileEdit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/profile/supervisorProfile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ApplicationStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ApplicationStudent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SupervisorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SupervisorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Policies/TitlePolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/TitlePolicy.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Title.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Title.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/moduleOwner/titleList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/moduleOwner/titleList.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_07_23_214145_create_application_student_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_07_23_214145_create_application_student_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_07_23_215302_add_preference_order_to_application_student_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/passwordReset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/passwordReset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/profile/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profile/studentProfile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/student/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/student/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/student/titleList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/student/titleList.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/supervisor/applicationList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/supervisor/applicationList.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +72,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Hugh &lt;hugh@hughdembp.home&gt;" />
+        <option value="yuzihang007 &lt;yuzihang007@126.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JsFlowSettings">
@@ -218,8 +243,30 @@
       <workItem from="1594341337165" duration="11759000" />
       <workItem from="1594393478602" duration="26057000" />
       <workItem from="1594492105910" duration="39629000" />
-      <workItem from="1594650238558" duration="105662000" />
+      <workItem from="1594650238558" duration="142050000" />
     </task>
+    <task id="LOCAL-00001" summary="update">
+      <created>1595726489460</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1595726489461</updated>
+    </task>
+    <task id="LOCAL-00002" summary="update">
+      <created>1595726836442</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1595726836442</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update">
+      <created>1595727107279</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1595727107279</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,7 +277,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -245,14 +304,19 @@
       <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="444" y="137" key="#PHP/0.23.1440.827@0.23.1440.827" timestamp="1594583538433" />
+    <state x="497" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1595763773198">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state x="497" y="143" key="#com.intellij.ide.util.MemberChooser/0.23.1440.823@0.23.1440.823" timestamp="1595763773198" />
     <state x="311" y="107" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1594602335097">
       <screen x="0" y="23" width="1440" height="826" />
     </state>
     <state x="311" y="107" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.23.1440.826@0.23.1440.826" timestamp="1594602335097" />
-    <state x="916" y="230" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1595551705767">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state x="916" y="230" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1595864641072">
+      <screen x="0" y="23" width="1440" height="822" />
     </state>
-    <state x="916" y="230" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.823@0.23.1440.823" timestamp="1595551705767" />
+    <state x="916" y="230" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.822@0.23.1440.822" timestamp="1595864641072" />
+    <state x="916" y="230" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.823@0.23.1440.823" timestamp="1595813850937" />
     <state x="909" y="197" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.826@0.23.1440.826" timestamp="1594699174956" />
     <state x="909" y="197" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.827@0.23.1440.827" timestamp="1594684331488" />
     <state x="909" y="197" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.828@0.23.1440.828" timestamp="1594436154763" />

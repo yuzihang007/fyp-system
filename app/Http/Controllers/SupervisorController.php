@@ -7,6 +7,7 @@ use App\Title;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use const http\Client\Curl\AUTH_DIGEST;
 
 class SupervisorController extends Controller
@@ -124,7 +125,7 @@ class SupervisorController extends Controller
     }
 
 
-//    student application list
+   // student application list
 //    public function applicationIndex(Title $title)
 //    {
 //        $user_id = auth()->user()->id;
@@ -132,17 +133,56 @@ class SupervisorController extends Controller
 //        return view('supervisor.applicationList')->with('titles', $user->titles);
 //    }
 
-    public function applicationIndex(ApplicationStudent $applicationStudent,Title $title)
 
+//    public function applicationIndex(User $user)
+//    {
+////        $user_id = auth()->user()->id;
+////        $supervisor = User::find($user_id);
+//        $users= User::all();
+//        return view('supervisor.applicationList',compact('users'));
+//    }
+
+    public function applicationIndex(Title $title)
     {
+//        $user_id= auth()->user()->id;
+//        $data = DB::table('users')
+//                ->Join('titles','users.id','=','titles.user_id')
+//                ->leftJoin('application_student','titles.id','=','application_student.title_id')
+////                ->where('users.id',$user_id)
+//                ->get();
 
-        $records=ApplicationStudent::all();
-        $titles=Title::all();
-//        where([
-//            'titles.user_id'=>'application_student.title_id'
-//        ]);
-        return view('supervisor.applicationList',compact('records'));
+
+//        $data = DB::table('application_student')
+//                ->leftJoin('users','application_student.user_id','=','users.id')
+//                ->leftJoin('titles','application_student.title_id','=','titles.id')
+//                ->get();
+//
+//        return view('supervisor.applicationList',compact('data'));
+
+
+        $data = DB::table('titles')
+            ->join('application_student','titles.id','=','application_student.title_id')
+            ->join('users','users.id','=','application_student.user_id')
+            ->get();
+
+        return view('supervisor.applicationList',compact('data'));
     }
+
+
+
+
+
+//    public function applicationIndex(ApplicationStudent $applicationStudent,Title $title)
+//
+//    {
+//
+//        $records=ApplicationStudent::all();
+//        $titles=Title::all();
+////        where([
+////            'titles.user_id'=>'application_student.title_id'
+////        ]);
+//        return view('supervisor.applicationList',compact('records'));
+//    }
 
 
 }

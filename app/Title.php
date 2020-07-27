@@ -29,16 +29,18 @@ class Title extends Model
             ->withTimestamps();
     }
 
-    public function applicationInstance()
+    public function applicationInstances()
     {
-        return $this->belongsTo(ApplicationStudent::class);
+        return $this->hasMany(ApplicationStudent::class);
     }
 
 
 
 
+
+
 //
-    //guanlian
+    //关联
     public function titleSelection($user_id)
     {
         return $this->hasOne(ApplicationStudent::class)->where('user_id',$user_id);
@@ -47,15 +49,25 @@ class Title extends Model
     //first choice
     public function firstPrefer($user_id)
     {
-        return $this->hasOne(ApplicationStudent::class)->where(['preferenceOrder'=>1,'user_id'=>$user_id]);
+        return $this->hasMany(ApplicationStudent::class)
+            ->where([
+                ['preferenceOrder','=',1],
+                ['user_id','=',$user_id]
+            ]);
     }
+
+
+
+
     //second choice
-    public function secondPrefer($user_id)
+    public function secondPrefer()
     {
         return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',2);
     }
+
+
     //third choice
-    public function thirdPrefer($user_id)
+    public function thirdPrefer()
     {
         return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',3);
     }

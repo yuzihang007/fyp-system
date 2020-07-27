@@ -7,19 +7,58 @@
 
 @section('content')
 
-    @foreach($records as $record)
 
-        user id :{{$record->user_id}}
-        title id :{{$record->title_id}}
-        {{$record->preferenceOrder}}
-        {{$record->project_title}}
+{{--        @foreach($data as $data)--}}
+
+{{--            <td> topic id:{{$data->topic_id}}{{$data->title_id}}</td>--}}
+{{--            <br>--}}
+{{--            <td> title: {{$data->project_title}}</td>--}}
+{{--            <br>--}}
+{{--            <td> suitable for: {{$data->suitable_for}}</td>--}}
+{{--            <br>--}}
+{{--            <td> Student Email: {{$data->email}}</td>--}}
+{{--            <br>--}}
+{{--            <td> student id: {{$data->user_id}}</td>--}}
+{{--            <br>--}}
+{{--            <td> Student name: {{$data->firstname}}  {{$data->lastname}}</td>--}}
+{{--            <br>--}}
+{{--            <td> Preference Order: {{$data->preferenceOrder}}</td>--}}
+{{--            <br>--}}
+
+
+
+
+
+{{--            <td> {{$data->project_title}}</td>--}}
+
+
+
+
+
+{{--            user id :{{$record->user_id}}--}}
+{{--            user name: {{$record->usernamee}}--}}
+{{--            title id :{{$record->title_id}}--}}
+{{--            {{$record->preferenceOrder}}--}}
+{{--            {{$record->project_title}} --}}
+        @endforeach
+
+{{--    @foreach($records as $record)--}}
+
+{{--        user id :{{$record->user_id}}--}}
+{{--        user name: {{$record->usernamee}}--}}
+{{--        title id :{{$record->title_id}}--}}
+{{--        {{$record->preferenceOrder}}--}}
+{{--        {{$record->project_title}}--}}
 
 
 {{--       @foreach($titles as $title)--}}
 {{--           {{$title->project_title}}--}}
 {{--       @endforeach--}}
 
-    @endforeach
+{{--    @endforeach--}}
+
+
+
 {{--    <div class="card">--}}
 {{--        <div class="card-header bg-primary text-white">Student Application</div>--}}
 {{--        <table class="table table-light table-striped table-hover ">--}}

@@ -38,6 +38,8 @@
                     </td>
                     <td>{{$title->keywords}}</td>
 
+
+
                     <th>{{$title->titleSelections_count}}</th>
                     <td><a href="{{url('/profile',$title->user->id)}}">{{$title->user->firstname}},{{$title->user->lastname}}</a></td>
                     <td>
@@ -45,23 +47,15 @@
 
                         <form method="POST" action="/title/{{$title->id}}/select">
                             @csrf
-
-{{--                            @if(Auth::user()->preference($title->preferenceOrder = 3 && $title->preferenceOrder != 2 && $title->preferenceOrder != 3)->exists())--}}
-{{--                            @foreach($title->students as $student)--}}
-{{--                            @if($student->firstPrefer(Auth::id())->exists())--}}
-   {{--如果学生的已经有题目的pre是1 就不会出现第一选项的按钮--}}
-
-{{--                            @foreach($title->students as $student)--}}
-{{--                            @can('firstPrefer',$student->pivot->preferenceOrder)--}}
-                                    <div class="form-check-inline">
-                                        <label for="titleMark1">
-                                            <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="1"  checked>
-                                            <label class="form-check-label" for="titleMark1">First choice</label>
-                                        </label>
-                                    </div>
-                                    <br/>
-
-
+                               @can('firstPrefer')
+                                <div class="form-check-inline">
+                                    <label for="titleMark1">
+                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="1"  checked>
+                                        <label class="form-check-label" for="titleMark1">First choice</label>
+                                    </label>
+                                </div>
+                                <br/>
+                            @endcan
                                 <div class="form-check-inline">
                                     <label for="titleMark2">
                                         <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="2" checked>
@@ -69,7 +63,6 @@
                                     </label>
                                 </div>
                                 <br/>
-
                                 <div class="form-check-inline">
                                     <label for="titleMark3">
                                         <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="3" checked>
@@ -77,6 +70,8 @@
                                     </label>
                                 </div>
                                 <br/>
+
+
 
 
 

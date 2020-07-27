@@ -81,7 +81,11 @@
                                     @csrf
                                 </form>
 
-                                <a class="dropdown-item" href="{{url('/profile',\Illuminate\Support\Facades\Auth::user()->id)}}">Profile</a>
+                                @if(auth()->user()->role === 4)
+                                    <a class="dropdown-item" href="{{url('student/profile',\Illuminate\Support\Facades\Auth::user()->id)}}">Profile</a>
+                                @else
+                                    <a class="dropdown-item" href="{{url('supervisor/profile',\Illuminate\Support\Facades\Auth::user()->id)}}">Profile</a>
+                                @endif
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>

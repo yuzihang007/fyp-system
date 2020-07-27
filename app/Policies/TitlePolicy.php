@@ -3,10 +3,12 @@
 namespace App\Policies;
 
 use App\ApplicationStudent;
+use App\Http\Controllers\StudentController;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Title;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TitlePolicy
 {
@@ -40,20 +42,26 @@ class TitlePolicy
         return $title->status ==1;
     }
 
-//    public function firstPrefer(User $user, Title $title)
-//    {
-//        $user_id= Auth::id();
-//
-//
-//        foreach($title->students as $student){
-//            echo $student->pivot->preferenceOrder;
-//        }
-//
-//        if($title->students()->user_id == $user_id && $title->students()->pivot->preferenceOrder !=1){
-//            return true;
-//        }
+    // 点击第一选择权限
+    public function firstPrefer(User $user)
+    {
+        $user_id=Auth::id();
+        $applications = DB::table('application_student')
+            ->where([
+                'preferenceOrder'=>1,
+                'user_id'=>$user_id,
+            ])->get();
 
-//    }
+        if ( $applications->contains('preferenceOrder','=',1)){
+            return false;
+        }else{
+            return true;
+        }
+
+
+    }
+
+
 
 
 

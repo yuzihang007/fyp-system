@@ -1,5 +1,8 @@
 <?php
 
+use App\ApplicationStudent;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +19,23 @@ Route::get('/', function () {
     return view('login.index');
 });
 
+//Route::get('/', function () {
+//    $user=Auth::user();
+//    $applications = DB::table('application_student')
+//        ->where([
+//            'preferenceOrder'=>1,
+//            'user_id'=>Auth::id(),
+//        ])->get();
+//
+//    if($applications->contains('preferenceOrder','<>',1)){
+//        echo 'false';
+//    }else{
+//        echo 'true';
+//    }
+//
+//});
+
+//创建管理员账户
 //Route::get('/', function () {
 //    \App\User::create([
 //        'username' => 'admin',
@@ -110,21 +130,32 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
 
 
 
-//title 详情页面
+    //title 详情页面
     Route::get('title/detail/{id}','TitleController@detail');
 
 
 
-//profile 详情页面
-    Route::get('/profile/{id}','UserController@profileDetail');
-//profile 创建页面 TODO:
-    Route::get('/user/create','UserController@list');
-//profile 创建行为 TODO:
-    Route::post('/user/create','UserController@list');
-//profile 修改页面 TODO:
-    Route::post('/profile/update','UserController@profileUpdate');
-//profile 修改行为 TODO:
-    Route::post('/user/update','UserController@list');
+    //profile ：学生profile详情页面  personal information page of student
+    Route::get('student/profile/{id}','UserController@studentProfile');
+
+    //profile： 学生profile修改页面 TODO:
+    Route::get('student/profile/edit','UserController@studentProfileEdit');
+
+
+
+
+
+//    //profile ：教师profile详情页面
+//    Route::get('supervisor/profile/{id}','UserController@supervisorProfile');
+//
+////profile 创建页面 TODO:
+//    Route::get('/user/create','UserController@list');
+////profile 创建行为 TODO:
+//    Route::post('/user/create','UserController@list');
+////profile 修改页面 TODO:
+//    Route::post('/profile/update','UserController@profileUpdate');
+////profile 修改行为 TODO:
+//    Route::post('/user/update','UserController@list');
 
 
 

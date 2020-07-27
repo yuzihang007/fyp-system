@@ -53,28 +53,29 @@ class User extends Authenticatable
             'application_student',
             'user_id',
             'title_id')
-            ->withPivot(['user_id','title_id','preferenceOrder','project_title'])
+            ->withPivot(['user_id','title_id','preferenceOrder'])
             ->withTimestamps();
     }
 
-//    public function preference($preferenceOrder)
-//    {
-//        return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',$preferenceOrder);
-//    }
 
 
     // 学生和申请模型的关联
-    public function applicationInstance()
+    public function applicationInstances()
     {
-        return $this->belongsTo(ApplicationStudent::class);
+        return $this->hasMany(ApplicationStudent::class);
     }
 
-
-
-    //first choice
-    public function firstPrefer($user_id)
+    //关联，一个用户有一个学生profile
+    public function studentProfile()
     {
-        return $this->hasOne(ApplicationStudent::class)->where(['preferenceOrder'=>1,'user_id'=>$user_id]);
+        return $this->hasOne(Student::class);
     }
+
+    //关联，一个用户有一个学生profile
+    public function supervisorProfile()
+    {
+        return $this->hasOne(Supervisor::class);
+    }
+
 
 }
