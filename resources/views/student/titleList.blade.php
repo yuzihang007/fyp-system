@@ -77,8 +77,7 @@
 
 
                         <div>
-                            @if($title->titleSelection(Auth::id())->exists())
-                            @else
+                            @if(!$title->titleSelection(Auth::id())->exists())
                             <button type="submit"  class="btn btn-info btn-default post-audit">Apply</button>
                             @endif
                         </div>
