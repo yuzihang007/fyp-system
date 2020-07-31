@@ -110,7 +110,7 @@ Route::group(['middleware'=>['student','auth']],function(){
     //TODO:student route
     Route::post('/student/myApplication','StudentController@application');
     //topic select
-    Route::post('/title/{title}/select','StudentController@titleSelect');
+    Route::post('/title/select','StudentController@titleSelect')->name('student.title.select');
 
 
 });

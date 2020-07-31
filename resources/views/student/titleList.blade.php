@@ -8,6 +8,8 @@
     @include('student.sidebar')
 @stop
 
+@include('popup.apply')
+
 @section('content')
 
 {{--    </div>--}}
@@ -21,15 +23,16 @@
                 <th>Suitable For</th>
                 <th>Keywords</th>
                 <th>renshu</th>
+                <th>Choice Number</th>
                 <th>Supervisor's Name</th>
                 <th>Operation</th>
             </tr>
             </thead>
 
 
-            @foreach($titles as $title)
+            @foreach($list as $key => $title)
                 <tr>
-                    <th scope="row">{{$title->topic_id}}{{$title->id}}</th>
+                    <td scope="row">{{$title->topic_id}}{{$title->id}}</td>
                     <td ><a href="{{url('title/detail',$title->id)}}">{{$title->project_title}}</a></td>
                     <td>
                         @foreach($title->suitable_for as $suitable_for)
@@ -40,49 +43,52 @@
 
 
 
-                    <th>{{$title->titleSelections_count}}</th>
-                    <td><a href="{{url('/profile',$title->user->id)}}">{{$title->user->firstname}},{{$title->user->lastname}}</a></td>
+                    <td>{{$title->titleSelections_count}}</td>
+                    <td>{{$title->choice_number}}</td>
+                    <td><a href="{{url('/profile',$title->user->id)}}">{{$title->full_name}}</a></td>
                     <td>
+                        @if(!$title->titleSelection(Auth::id())->exists() && $apply->count() < 3)
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal" data-key="{{$key}}">
+                                Apply
+                            </button>
+                        @endif
+
+{{--                        <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#addModal">Apply</button>--}}
+
+{{--                        <form method="POST" action="/title/{{$title->id}}/select">--}}
+{{--                            @csrf--}}
+
+{{--                                <div class="form-check-inline">--}}
+{{--                                    <label for="titleMark1">--}}
+{{--                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="1"  checked>--}}
+{{--                                        <label class="form-check-label" for="titleMark1">First choice</label>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                                <br/>--}}
+
+{{--                                <div class="form-check-inline">--}}
+{{--                                    <label for="titleMark2">--}}
+{{--                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="2" checked>--}}
+{{--                                        <label class="form-check-label" for="titleMark2">Second Choice</label>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                                <br/>--}}
+{{--                                <div class="form-check-inline">--}}
+{{--                                    <label for="titleMark3">--}}
+{{--                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="3" checked>--}}
+{{--                                        <label class="form-check-label" for="titleMark3">Third Choice</label>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                                <br/>--}}
 
 
-                        <form method="POST" action="/title/{{$title->id}}/select">
-                            @csrf
-
-                                <div class="form-check-inline">
-                                    <label for="titleMark1">
-                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="1"  checked>
-                                        <label class="form-check-label" for="titleMark1">First choice</label>
-                                    </label>
-                                </div>
-                                <br/>
-
-                                <div class="form-check-inline">
-                                    <label for="titleMark2">
-                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="2" checked>
-                                        <label class="form-check-label" for="titleMark2">Second Choice</label>
-                                    </label>
-                                </div>
-                                <br/>
-                                <div class="form-check-inline">
-                                    <label for="titleMark3">
-                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="3" checked>
-                                        <label class="form-check-label" for="titleMark3">Third Choice</label>
-                                    </label>
-                                </div>
-                                <br/>
-
-
-
-
-
-
-                        <div>
-                            @if(!$title->titleSelection(Auth::id())->exists())
-                            <button type="submit"  class="btn btn-info btn-default post-audit">Apply</button>
-                            @endif
-                        </div>
-                        <br>
-                        </form>
+{{--                        <div>--}}
+{{--                            @if(!$title->titleSelection(Auth::id())->exists())--}}
+{{--                            <button type="submit"  class="btn btn-info btn-default">Apply</button>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                        <br>--}}
+{{--                        </form>--}}
                     </td>
 
                 </tr>
@@ -94,9 +100,25 @@
 
     <!--fen ye-->
     <div class="pagination justify-content-end">
-        {{$titles->render()}}
+        {{$list->render()}}
 
     </div>
 @stop
 
+@section('js')
+    <script>
+        var datas = @json($list)['data'];
+
+        $('#applyModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var recipient = button.data('key');
+
+            var data = datas[recipient];
+
+            var modal = $(this);
+            console.log(data.id);
+            modal.find('#titleMk').val(data.id);
+        });
+    </script>
+@endsection
 

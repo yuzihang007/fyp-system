@@ -24,8 +24,8 @@
     <script src="{{ asset('js/popper.min.js?tk=1594870707812') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js?tk=1594870707812') }}"></script>
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
-    <script src="{{ asset('js/owner.js?tk=1594870707812') }}" defer ></script>
-    <script src="{{ asset('js/hire.js?tk=1594870707812') }}" defer ></script>
+{{--    <script src="{{ asset('js/owner.js?tk=15948707072') }}" defer ></script>--}}
+{{--    <script src="{{ asset('js/hire.js?tk=1594870707812') }}" defer ></script>--}}
     <script src="{{ asset('layer/layer.js') }}"></script>
 
 
@@ -39,7 +39,6 @@
     @show
 </head>
 <body>
-
 
 @section('head')
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -109,7 +108,6 @@
 
 
 
-
 @section('middle')
     <!--Head of web page-->
     <div class="container-fluid">
@@ -136,6 +134,7 @@
     </div>
 @show
 
+@yield('js')
 
 </body>
 </html>

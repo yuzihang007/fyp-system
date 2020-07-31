@@ -7,6 +7,7 @@ use App\Title;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -19,21 +20,28 @@ class StudentController extends Controller
 
 
     // topic list
-    public function titleIndex(Title $title)
+    public function titleIndex(Title $title,ApplicationStudent $applicationStudent)
     {
-        $titles = Title::where('status',1)->orderBy('created_at','desc')->withCount('titleSelections')->paginate(3);
-        return view('student.titleList',compact('titles'));
+        $list = $title->query()->where('status',1)->orderBy('created_at','desc')->with(['titleSelections' => function($query) {
+            $query->where('user_id', Auth::id());
+        }])->paginate(3);
+
+        $apply = $applicationStudent->query()->where('user_id', Auth::id())->get()->pluck('preferenceOrder')->flip();
+
+        return view('student.titleList',compact('list', 'apply'));
     }
 
 
     //title select
-    public function titleSelect(Title $title, Request $request)
+    public function titleSelect(Request $request)
     {
+        $title_id = $request->input('title_id');
+        $preferenceOrder = $request->input('preferenceOrder');
 
         ApplicationStudent::firstOrcreate([
             'user_id'=>Auth::id(),
-            'title_id'=>$title->id,
-            'preferenceOrder' => \request('preferenceOrder')
+            'title_id'=>$title_id,
+            'preferenceOrder' => $preferenceOrder
         ]);
         return redirect('student/titleIndex');
     }
