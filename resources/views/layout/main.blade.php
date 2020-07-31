@@ -26,6 +26,7 @@
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
     <script src="{{ asset('js/owner.js?tk=1594870707812') }}" defer ></script>
     <script src="{{ asset('js/hire.js?tk=1594870707812') }}" defer ></script>
+    <script src="{{ asset('layer/layer.js') }}"></script>
 
 
 

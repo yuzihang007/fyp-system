@@ -9,23 +9,42 @@ $.ajaxSetup({
 $(".post-audit").click(function (event) {
 
     target = $(event.target);
-    const post_id = target.attr("post-id");
-    console.log(post_id);
-    const status = target.attr("post-action-status");
+    var post_id = target.attr("post-id");
+    var status = target.attr("post-action-status");
 
-    $.ajax({
-
-        url: "/title/" + post_id +"/status",
-        method: "POST",
-        data:{"status":status},
-        dataType: "json",
-        success: function (data) {
-            if (data.code < 0){
-                alert(data.msg);
-                return;
+    //询问框
+    layer.confirm('Do you want to update the status?', {
+        btn: ['yes', 'cancel'], //按钮
+        area: ['320px', '186px'],
+        skin: 'demo-class'
+    }, function () {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data:{"status":status},
+            url: "/title/" + post_id +"/status",
+            success: function (res) {
+                console.log(res);
+                layer.msg('success', {
+                    icon: 1,
+                    time: 1500 //2秒关闭（如果不配置，默认是3秒）
+                }, function(){
+                    location.reload();
+                });
+            },
+            error(res){
+                console.log(res.responseJSON.msg);
+                layer.open({
+                    title:false,
+                    content:'<span>'+res.responseJSON.msg+'</span>',
+                    btn:false,
+                    time:3000,
+                    closeBtn:0,
+                });
             }
-            location.reload();
-            target.parent().parent().remove();
-        }
-    })
+        });
+    }, function () {
+
+    });
+
 });

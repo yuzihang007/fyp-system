@@ -16,10 +16,15 @@ class ModuleOwnerController extends Controller
     }
 
     // Vetting (题目总列表）
-    public function vettingList(Title $title)
+    public function vettingList(Title $data, Request $request)
     {
-        $titles= $title->with('user')->paginate(4);
-        return view('moduleOwner.title.list',compact('titles'));
+        $title = $request->input('title');
+
+        $list = $data->with('user')->when($title, function ($query) use($title) {
+            $query->where('project_title', 'like', "%$title%");
+        })->paginate(8);
+
+        return view('moduleOwner.title.list',compact('list'));
     }
 
     //supervisor 审核行为
@@ -36,19 +41,34 @@ class ModuleOwnerController extends Controller
     }
 
     //title wait for vetting (待审核题目列表）
-    public function waitForVetting(Title $title)
+    public function waitForVetting(Title $data, Request $request)
     {
-        $titles = $title->with('user')->where('status',0)->paginate(8);
-        return view('moduleOwner.title.wait',compact('titles'));
+        $title = $request->input('title');
+
+        $list = $data->with('user')->when($title, function ($query) use($title) {
+            $query->where('project_title', 'like', "%$title%");
+        })->where('status',0)->paginate(8);
+
+        return view('moduleOwner.title.wait',compact('list'));
     }
-    public function passForVetting(Title $title)
+    public function passForVetting(Title $data, Request $request)
     {
-        $titles = $title->with('user')->where('status',1)->paginate(8);
-        return view('moduleOwner.title.pass',compact('titles'));
+        $title = $request->input('title');
+
+        $list = $data->with('user')->when($title, function ($query) use($title) {
+            $query->where('project_title', 'like', "%$title%");
+        })->where('status',1)->paginate(8);
+
+        return view('moduleOwner.title.pass',compact('list'));
     }
-    public function refuseForVetting(Title $title)
+    public function refuseForVetting(Title $data, Request $request)
     {
-        $titles = $title->with('user')->where('status',-1)->paginate(8);
-        return view('moduleOwner.title.refuse',compact('titles'));
+        $title = $request->input('title');
+
+        $list = $data->with('user')->when($title, function ($query) use($title) {
+            $query->where('project_title', 'like', "%$title%");
+        })->where('status',-1)->paginate(8);
+
+        return view('moduleOwner.title.refuse',compact('list'));
     }
 }
