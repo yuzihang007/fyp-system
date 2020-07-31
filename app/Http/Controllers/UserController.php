@@ -2,31 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
+use App\Supervisor;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    //个人设置页面
-    public function setting()
+
+    //学生profile页面
+    public function studentProfile(User $user,$id)
     {
-        return view('user.setting');
+        $data = DB::table('users')->where('users.id','=',$id)
+        ->leftJoin('students','users.id','=','students.user_id')
+        ->get();
+
+        return view('profile.studentProfile',compact('data'));
     }
-    //个人设置行为
-    public function settingStore()
+
+
+    // 学生profile更新页面
+    public function studentProfileEdit(Student $student)
+    {
+        return view('profile.studentProfileEdit',compact('student'));
+    }
+
+
+
+
+
+    public function studentProfileUpdate()
     {
 
     }
 
-    //profile 页面
-    public function profileDetail($id)
+    //教师profile页面
+    public function SupervisorProfile(User $user,$id)
     {
-        $user= User::findOrFail($id);
-        return view('profile.show',compact('user'));
+        $data = DB::table('users')->where('users.id','=',$id)
+            ->leftJoin('supervisors','users.id','=','supervisors.user_id')
+            ->get();
+
+        return view('profile.supervisorProfile',compact('data'));
     }
 
-    public function profileUpdate()
+
+
+
+
+    public function supervisorProfileEdit(Supervisor $supervisor)
     {
         //
+        return view('profile.supervisorProfileEdit',compact('supervisor'));
     }
 }

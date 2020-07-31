@@ -26,9 +26,10 @@ class StudentController extends Controller
     }
 
 
-    //title application
+    //title select
     public function titleSelect(Title $title, Request $request)
     {
+
         ApplicationStudent::firstOrcreate([
             'user_id'=>Auth::id(),
             'title_id'=>$title->id,
@@ -36,4 +37,15 @@ class StudentController extends Controller
         ]);
         return redirect('student/titleIndex');
     }
+
+
+
+
+    //cancel selection
+
+//    public function unSelect(Title $title)
+//    {
+//        $title->titleSelection(Auth::id())->delete();
+//        return back();
+//    }
 }

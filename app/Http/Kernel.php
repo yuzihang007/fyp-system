@@ -21,12 +21,12 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
-        \App\Http\Middleware\TrustProxies::class,
-        \Fruitcake\Cors\HandleCors::class,
+//        \App\Http\Middleware\TrustProxies::class,
+//        \Fruitcake\Cors\HandleCors::class,
         \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
-        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+//        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
     /**
@@ -70,10 +70,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => isAdmin::class,
-        'student' => isStudent::class,
-        'moduleOwner' => isModuleOwner::class,
-        'assessor' => isAssessor::class,
-        'supervisor' => isSupervisor::class,
+        'student' => isStudent::class, // 学生
+        'moduleOwner' => isModuleOwner::class, // 教学管理员
+        'assessor' => isAssessor::class, // 评估人员
+        'supervisor' => isSupervisor::class, // 教师
         'auth.redirect' =>userRoleRedirect::class
     ];
 }

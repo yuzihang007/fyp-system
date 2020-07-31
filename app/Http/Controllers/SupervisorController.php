@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\ApplicationStudent;
+use App\Student;
 use App\Title;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use const http\Client\Curl\AUTH_DIGEST;
 
 class SupervisorController extends Controller
 {
@@ -114,19 +118,56 @@ class SupervisorController extends Controller
     //title delete （删除）
     public function delete(Title $title)
     {
-
-        // TODO用户权限认证
-
+        // TODO:用户权限认证
         $title->delete();
         return redirect('title/index');
     }
 
 
-    //student application list
-    public function applicationIndex()
+
+    //学生申请列表
+    public function applicationIndex(ApplicationStudent $applicationStudent)
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        return view('supervisor.applicationList')->with('titles', $user->titles);
+        $data = DB::table('application_student')
+            ->leftJoin('titles','application_student.title_id','=','titles.id')
+            ->join('students','students.user_id','=','application_student.user_id')
+            ->where('titles.user_id','=',Auth::id())
+            ->get();
+//
+//return view('supervisor.applicationList',compact('data'));
+        $applicationStudents= ApplicationStudent::paginate(4);
+//
+        return view('supervisor.applicationList',compact('applicationStudents','data'));
     }
+
+
+    //给学生申请评分
+    public function  markStudent(ApplicationStudent $applicationStudent)
+    {
+
+        $this->validate(request(),[
+
+            'supervisorMarkStudent'=>'required|in:-2,-1,0,1,2',
+        ]);
+        $applicationStudent->supervisorMarkStudent = request('supervisorMarkStudent');
+        $applicationStudent->save();
+        return redirect('/');
+    }
+
+    //supervisor hire
+    public function hire(ApplicationStudent $applicationStudent)
+    {
+
+        $this->validate(request(),[
+            'allocationStatus'=>'required|in:0,1',
+        ]);
+
+        $applicationStudent->allocationStatus = request('allocationStatus');
+        $applicationStudent->save();
+
+        return redirect('moduleOwner.titleList',compact('titles'));
+    }
+
+
+
 }

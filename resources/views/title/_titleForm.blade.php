@@ -1,6 +1,6 @@
 
 <!--title input/edit form-->
-
+@section('content')
          <form method="post" action="">
 {{--             {{url('supervisor/titleSave')}}--}}
              @csrf
@@ -19,7 +19,7 @@
                  <label for="inputTitle">Project Title</label>
                  <input type="text" name="project_title"
                         class="form-control" id="inputTitle"
-                        value="{{old('project_title')}}">
+                        value="">
              </div>
 {{--             value="{{old('project_title')?('project_title'):$title ?? ''->project_title}}"--}}
 
@@ -29,7 +29,7 @@
                  <label for="inputTitle">Keywords</label>
                  <input type="text" name="keywords"
                         class="form-control" id="inputTitle"
-                        value="{{old('keywords')}}">
+                        value="">
              </div>
 
 {{--             value="{{old('project_title')?('project_title'):$title ?? ''->project_title}}"--}}
@@ -59,16 +59,9 @@
                  <label for="inputDescription" >Description</label>
                  <textarea name="description" class="form-control"
                            id="summernote" rows="15"
-                           value="{{old('description')}}">
+                           value="">
 {{--                     {{old('description')?('description'):$title ?? ''->description}}--}}
                  </textarea>
-                 <script>
-                     $('#summernote').summernote({
-                         placeholder: 'Hello Bootstrap 4',
-                         tabsize: 2,
-                         height: 100
-                     });
-                 </script>
 
              </div>
 
@@ -79,3 +72,4 @@
              </div>
 
          </form>
+@endsection

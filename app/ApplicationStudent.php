@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class ApplicationStudent extends Pivot
 {
     //
-    protected $fillable = ['user_id','title_id','preferenceOrder'];
+    protected $fillable = ['user_id','title_id','preferenceOrder','allocationStatus','supervisorMarkStudent'];
+
 
 
     //获取模型中的学生用户
@@ -24,11 +25,15 @@ class ApplicationStudent extends Pivot
         return $this->hasOne(Title::class);
     }
 
-//    public function firstPreference()
+//    public function studentApplication()
 //    {
-//        return $this->hasOne(ApplicationStudent::class)->where([
-//            'user_id' => Auth::id(),
-//            'preferenceOrder' => 1
-//        ]);
+//        return $this->belongsTo(User::class,'user_id','id');
 //    }
+//
+//    public function title()
+//    {
+//        return $this->belongsTo(Title::class);
+//    }
+
+
 }

@@ -1,5 +1,8 @@
 <?php
 
+use App\ApplicationStudent;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +19,38 @@ Route::get('/', function () {
     return view('login.index');
 });
 
+
 //Route::get('/', function () {
+//
+//$data = DB::table('application_student')
+//    ->join('titles','application_student.title_id','=','titles.id')
+//    ->join('students','students.user_id','=','application_student.user_id')
+//    ->get();
+//////
+//dd($data);
+//
+//
+//});
+
+
+//Route::get('/', function () {
+//    $user=Auth::user();
+//    $applications = DB::table('application_student')
+//        ->where([
+//            'preferenceOrder'=>1,
+//            'user_id'=>Auth::id(),
+//        ])->get();
+//
+//    if($applications->contains('preferenceOrder','<>',1)){
+//        echo 'false';
+//    }else{
+//        echo 'true';
+//    }
+//
+//});
+
+////创建管理员账户
+//Route::get('/register', function () {
 //    \App\User::create([
 //        'username' => 'admin',
 //            'password'=> bcrypt('12345678'),
@@ -75,7 +109,6 @@ Route::group(['middleware'=>['student','auth']],function(){
     Route::get('/student/titleIndex','StudentController@titleIndex');
     //TODO:student route
     Route::post('/student/myApplication','StudentController@application');
-
     //topic select
     Route::post('/title/{title}/select','StudentController@titleSelect');
 
@@ -95,14 +128,18 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
     Route::get('moduleOwner/home','ModuleOwnerController@home' );
 
     // supervisor title list
-    Route::get('/moduleOwner/vettingList','ModuleOwnerController@vettingList');
+    Route::get('/moduleOwner/vettingList','ModuleOwnerController@vettingList')->name('module.adjust.list');
 
     // change the vetting status of title
     Route::post('/title/{title}/status','ModuleOwnerController@vetting');
     //
-    Route::get('/title/waitForVetting','ModuleOwnerController@waitForVetting');
+    Route::get('/title/waitForVetting','ModuleOwnerController@waitForVetting')->name('module.wait.vetting');
+    Route::get('/title/passForVetting','ModuleOwnerController@passForVetting')->name('module.pass.vetting');
+    Route::get('/title/refuseForVetting','ModuleOwnerController@refuseForVetting')->name('module.refuse.vetting');
 });
 
+    Route::any('/application/{applicationStudent}/mark','SupervisorController@markStudent');
+    Route::post('/application/{applicationStudent}/status','SupervisorController@hire');
 
 
 
@@ -110,21 +147,40 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
 
 
 
-//title 详情页面
+
+
+    //title 详情页面
     Route::get('title/detail/{id}','TitleController@detail');
 
 
 
-//profile 详情页面
-    Route::get('/profile/{id}','UserController@profileDetail');
-//profile 创建页面 TODO:
-    Route::get('/user/create','UserController@list');
-//profile 创建行为 TODO:
-    Route::post('/user/create','UserController@list');
-//profile 修改页面 TODO:
-    Route::post('/profile/update','UserController@profileUpdate');
-//profile 修改行为 TODO:
-    Route::post('/user/update','UserController@list');
+    //profile ：学生profile详情页面  personal information page of student
+    Route::get('student/profile/{id}','UserController@studentProfile');
+
+    //
+
+
+
+
+//    //profile： 学生profile修改页面 TODO:
+    Route::get('student/profile/edit','UserController@studentProfileEdit');
+
+
+
+
+
+    //profile ：教师profile详情页面
+    Route::get('supervisor/profile/{id}','UserController@supervisorProfile');
+    Route::get('supervisor/profile/edit','UserController@supervisorProfileEdit');
+//
+////profile 创建页面 TODO:
+//    Route::get('/user/create','UserController@list');
+////profile 创建行为 TODO:
+//    Route::post('/user/create','UserController@list');
+////profile 修改页面 TODO:
+//    Route::post('/profile/update','UserController@profileUpdate');
+////profile 修改行为 TODO:
+//    Route::post('/user/update','UserController@list');
 
 
 

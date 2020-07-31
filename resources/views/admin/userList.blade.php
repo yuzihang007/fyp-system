@@ -32,9 +32,8 @@
                     <td>
 
                         <a href="/admin/{{$user->id}}/delete">Delete</a><br/>
-{{--                        @can('update',$user)--}}
                         <a href="/admin/{{$user->id}}/edit">Reset password</a>
-{{--                        @endcan()--}}
+
 
 
                     </td>

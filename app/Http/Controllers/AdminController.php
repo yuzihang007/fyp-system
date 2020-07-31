@@ -25,7 +25,7 @@ class AdminController extends Controller
         $this->Validate($request,[
             'username'=>'required|min:5|unique:users,username',
             'password'=>'required|min:6,confirmed',
-            'password_confirmation' => 'required|same:password',
+//            'password_confirmation' => 'required|same:password',
             'role'=>'required',
         ]);
 
@@ -60,7 +60,7 @@ class AdminController extends Controller
         $this->Validate(request(),[
 //            'username'=>'required|min:5|unique:users,username',
             'password'=>'required|min:6,confirmed',
-            'password_confirmation' => 'required|same:password',
+//            'password_confirmation' => 'required|same:password',
             'role'=>'required',
         ]);
 

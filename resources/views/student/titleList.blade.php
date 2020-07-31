@@ -38,6 +38,8 @@
                     </td>
                     <td>{{$title->keywords}}</td>
 
+
+
                     <th>{{$title->titleSelections_count}}</th>
                     <td><a href="{{url('/profile',$title->user->id)}}">{{$title->user->firstname}},{{$title->user->lastname}}</a></td>
                     <td>
@@ -45,27 +47,6 @@
 
                         <form method="POST" action="/title/{{$title->id}}/select">
                             @csrf
-
-{{--                            @if(Auth::user()->preference($title->preferenceOrder = 3 && $title->preferenceOrder != 2 && $title->preferenceOrder != 3)->exists())--}}
-                            @if($title->checkFirst(Auth::id())->exists())
-
-                                <div class="form-check-inline">
-                                    <label for="titleMark2">
-                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="2" checked>
-                                        <label class="form-check-label" for="titleMark2">Second Choice</label>
-                                    </label>
-                                </div>
-                                <br/>
-
-                                <div class="form-check-inline">
-                                    <label for="titleMark3">
-                                        <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="3" checked>
-                                        <label class="form-check-label" for="titleMark3">Third Choice</label>
-                                    </label>
-                                </div>
-                                <br/>
-
-                            @else
 
                                 <div class="form-check-inline">
                                     <label for="titleMark1">
@@ -82,7 +63,6 @@
                                     </label>
                                 </div>
                                 <br/>
-
                                 <div class="form-check-inline">
                                     <label for="titleMark3">
                                         <input class="form-check-input" type="radio" name="preferenceOrder" id="preferenceOrder" value="3" checked>
@@ -91,8 +71,6 @@
                                 </div>
                                 <br/>
 
-
-                            @endif
 
 
 

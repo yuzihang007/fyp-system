@@ -21,27 +21,57 @@ class Title extends Model
     //学生申请和title的关联
     public function students()
     {
-        return $this->belongsToMany(User::class,'application_student')->using(ApplicationStudent::class);
+        return $this->belongsToMany(User::class,
+            'application_student',
+            'title_id',
+            'user_id')
+            ->withPivot(['preferenceOrder','user_id','title_id','allocationStatus','supervisorMarkStudent'])
+            ->withTimestamps();
     }
+
+    public function applicationInstances()
+    {
+        return $this->hasMany(ApplicationStudent::class);
+    }
+
+
 
 
 
 
 //
-    //guanlian
+    //关联
     public function titleSelection($user_id)
     {
         return $this->hasOne(ApplicationStudent::class)->where('user_id',$user_id);
     }
 
-
-    public function checkFirst($user_id)
+    //first choice
+    public function firstPrefer($user_id)
     {
-        return $this->hasOne(ApplicationStudent::class)->where([
-            'user_id' => $user_id,
-            'preferenceOrder'=> 1
-        ]);
+        return $this->hasMany(ApplicationStudent::class)
+            ->where([
+                ['preferenceOrder','=',1],
+                ['user_id','=',$user_id]
+            ]);
     }
+
+
+
+
+    //second choice
+    public function secondPrefer()
+    {
+        return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',2);
+    }
+
+
+    //third choice
+    public function thirdPrefer()
+    {
+        return $this->hasOne(ApplicationStudent::class)->where('preferenceOrder',3);
+    }
+
 
 
     public function titleSelections()
@@ -54,5 +84,12 @@ class Title extends Model
         'suitable_for'=>'array'
     ];
 
-
+    public function getFullNameAttribute()
+    {
+        return $this->user->firstname ? $this->user->firstname . ',' . $this->user->lastname: $this->user->username;
+    }
+    public function getAuditStatusAttribute()
+    {
+        return ['-1' => 'Fail', '0' => 'Wait', '1' => 'Pass'][$this->status] ?? 'Error';
+    }
 }

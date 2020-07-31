@@ -9,11 +9,18 @@
 @stop
 
 @section('content')
-    <div>
-        <a href="{{'/waitForVetting'}}"><button >Passed Topic</button></a>
-        <button >Waiting for vetting</button>
-        <button >waitting for adjusting</button>
-    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Passed Topic</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('module.wait.vetting')}}">Waiting for vetting</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="#">waiting for adjusting</a>
+        </li>
+    </ul>
+
 <div class="card">
     <div class="card-header bg-primary text-white">List of project title</div>
     <table class="table table-light table-striped table-hover">
