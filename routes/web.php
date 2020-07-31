@@ -50,7 +50,7 @@ Route::get('/', function () {
 //});
 
 ////创建管理员账户
-//Route::get('/', function () {
+//Route::get('/register', function () {
 //    \App\User::create([
 //        'username' => 'admin',
 //            'password'=> bcrypt('12345678'),
@@ -128,12 +128,14 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
     Route::get('moduleOwner/home','ModuleOwnerController@home' );
 
     // supervisor title list
-    Route::get('/moduleOwner/vettingList','ModuleOwnerController@vettingList');
+    Route::get('/moduleOwner/vettingList','ModuleOwnerController@vettingList')->name('module.adjust.list');
 
     // change the vetting status of title
     Route::post('/title/{title}/status','ModuleOwnerController@vetting');
     //
-    Route::get('/title/waitForVetting','ModuleOwnerController@waitForVetting');
+    Route::get('/title/waitForVetting','ModuleOwnerController@waitForVetting')->name('module.wait.vetting');
+    Route::get('/title/passForVetting','ModuleOwnerController@passForVetting')->name('module.pass.vetting');
+    Route::get('/title/refuseForVetting','ModuleOwnerController@refuseForVetting')->name('module.refuse.vetting');
 });
 
     Route::any('/application/{applicationStudent}/mark','SupervisorController@markStudent');

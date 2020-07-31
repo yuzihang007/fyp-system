@@ -10,6 +10,7 @@ $(".post-audit").click(function (event) {
 
     target = $(event.target);
     const post_id = target.attr("post-id");
+    console.log(post_id);
     const status = target.attr("post-action-status");
 
     $.ajax({
@@ -19,10 +20,11 @@ $(".post-audit").click(function (event) {
         data:{"status":status},
         dataType: "json",
         success: function (data) {
-            if (data.error !=0){
-                alert(data.msg)
+            if (data.code < 0){
+                alert(data.msg);
                 return;
             }
+            location.reload();
             target.parent().parent().remove();
         }
     })

@@ -84,5 +84,12 @@ class Title extends Model
         'suitable_for'=>'array'
     ];
 
-
+    public function getFullNameAttribute()
+    {
+        return $this->user->firstname ? $this->user->firstname . ',' . $this->user->lastname: $this->user->username;
+    }
+    public function getAuditStatusAttribute()
+    {
+        return ['-1' => 'Fail', '0' => 'Wait', '1' => 'Pass'][$this->status] ?? 'Error';
+    }
 }

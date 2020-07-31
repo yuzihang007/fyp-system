@@ -15,24 +15,23 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- CSS only -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css?tk=1594870707812') }}">
 {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 
     <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ asset('js/jquery.min.js?tk=1594870707812') }}"></script>
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/popper.min.js?tk=1594870707812') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js?tk=1594870707812') }}"></script>
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
-    <script src="{{ asset('js/owner.js') }}" defer ></script>
-    <script src="{{ asset('js/hire.js') }}" defer ></script>
+    <script src="{{ asset('js/owner.js?tk=1594870707812') }}" defer ></script>
+    <script src="{{ asset('js/hire.js?tk=1594870707812') }}" defer ></script>
 
 
 
     <!-- include summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <link href="{{ asset('css/summernote.min.css?tk=1594870707812') }}" rel="stylesheet">
+    <script src="{{ asset('js/summernote.min.js?tk=1594870707812') }}"></script>
 
 
     @section('style')
