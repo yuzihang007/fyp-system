@@ -161,10 +161,10 @@ class SupervisorController extends Controller
             'allocationStatus'=>'required|in:0,1',
         ]);
 
-        $applicationStudent->allocationStatus = request('allocationStatus');
+        $applicationStudent->allocation_status = request('allocationStatus');
         $applicationStudent->save();
 
-        return redirect('moduleOwner.titleList',compact('titles'));
+        return success();
     }
 
 

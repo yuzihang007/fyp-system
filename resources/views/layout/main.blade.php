@@ -15,24 +15,24 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- CSS only -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css?tk=1594870707812') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 
     <!-- JS, Popper.js, and jQuery -->
-    <script src="{{ asset('js/jquery.min.js?tk=1594870707812') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
-    <script src="{{ asset('js/popper.min.js?tk=1594870707812') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js?tk=1594870707812') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
-{{--    <script src="{{ asset('js/owner.js?tk=15948707072') }}" defer ></script>--}}
-{{--    <script src="{{ asset('js/hire.js?tk=1594870707812') }}" defer ></script>--}}
+    <script src="{{ asset('js/owner.js') }}" defer ></script>
+    <script src="{{ asset('js/hire.js') }}" defer ></script>
     <script src="{{ asset('layer/layer.js') }}"></script>
 
 
 
     <!-- include summernote css/js -->
-    <link href="{{ asset('css/summernote.min.css?tk=1594870707812') }}" rel="stylesheet">
-    <script src="{{ asset('js/summernote.min.js?tk=1594870707812') }}"></script>
+    <link href="{{ asset('css/summernote.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/summernote.min.js') }}"></script>
 
 
     @section('style')
