@@ -109,16 +109,16 @@
     <script>
         var datas = @json($list)['data'];
 
-        $('#applyModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var recipient = button.data('key');
+    $('#applyModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var recipient = button.data('key');
 
-            var data = datas[recipient];
+    var data = datas[recipient];
 
-            var modal = $(this);
-            console.log(data.id);
-            modal.find('#titleMk').val(data.id);
-        });
+    var modal = $(this);
+    console.log(data.id);
+    modal.find('#titleMk').val(data.id);
+    });
     </script>
 @endsection
 

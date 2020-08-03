@@ -136,6 +136,9 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
     Route::get('/title/waitForVetting','ModuleOwnerController@waitForVetting')->name('module.wait.vetting');
     Route::get('/title/passForVetting','ModuleOwnerController@passForVetting')->name('module.pass.vetting');
     Route::get('/title/refuseForVetting','ModuleOwnerController@refuseForVetting')->name('module.refuse.vetting');
+
+    Route::get('/moduleOwner/student_apply','ModuleOwnerController@applyStudentList')->name('module.student.apply');
+    Route::get('/moduleOwner/wait_allocate','ModuleOwnerController@waitAllocateStudent')->name('module.student.wait_allocate');
 });
 
     Route::any('/application/{applicationStudent}/mark','SupervisorController@markStudent');

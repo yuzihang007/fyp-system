@@ -38,7 +38,7 @@
                         <a href="{{url('title/detail',$title->id)}}">detail</a>
                         @can('update',$title)
                         <a href="/title/{{$title->id}}/edit">edit</a>
-                        @endcan()
+                        @endcan
                         @can('delete',$title) <a href="/title/{{$title->id}}/delete">delete</a>@endcan
 
 
