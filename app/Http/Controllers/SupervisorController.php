@@ -128,16 +128,21 @@ class SupervisorController extends Controller
     //学生申请列表
     public function applicationIndex(ApplicationStudent $applicationStudent)
     {
-        $data = DB::table('application_student')
-            ->leftJoin('titles','application_student.title_id','=','titles.id')
-            ->join('students','students.user_id','=','application_student.user_id')
-            ->where('titles.user_id','=',Auth::id())
-            ->get();
+//        $data = DB::table('application_student')
+//            ->leftJoin('titles','application_student.title_id','=','titles.id')
+//            ->join('students','students.user_id','=','application_student.user_id')
+//            ->where('titles.user_id','=',Auth::id())
+//            ->get();
+
+        $list = DB::table('application_student as a')->leftJoin('titles as b',function ($join) {
+            $join->on('a.title_id','=','b.id');
+        })->leftJoin('users as c', function ($join) {
+            $join->on('a.user_id','=','c.id');
+        })->where('b.user_id',Auth::id())->select(['c.username','c.email','b.topic_id','b.project_title as title','a.preferenceOrder as choice_order','a.student_number','b.suitable_for'])->get();
 //
-//return view('supervisor.applicationList',compact('data'));
-        $applicationStudents= ApplicationStudent::paginate(4);
+//        $applicationStudents= ApplicationStudent::paginate(4);
 //
-        return view('supervisor.applicationList',compact('applicationStudents','data'));
+        return view('supervisor.applicationList',compact('applicationStudents','list'));
     }
 
 
