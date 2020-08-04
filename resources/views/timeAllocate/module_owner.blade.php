@@ -10,37 +10,36 @@
 
 @section('content')
 
-    <div class="card">
-        <div class="card-header bg-primary text-white">List of project title</div>
-        <div class="row">
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <label>start Time：</label>
-                    <!--指定 date标记-->
-                    <div class='input-group date'>
-                        <input type='text' class="form-control" id='datetimepicker2'/>
-                        <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
+    <div class="col-md-12">
+
+        <form class="form-horizontal" method="post" action="{{route('save.time.allocate',['type' => 0])}}">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-header bg-primary text-white">List of project title</div>
+                </div>
+                <div class="panel-body">
+                    {{ csrf_field() }}
+                    {{ method_field('POST') }}
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-12 control-label">start Time：</label>
+                        <div class="col-md-6 col-xs-12">
+                            <input type='text' class="form-control" name="start_time" id='datetimepicker2'/>
+                        </div>
+                    </div>
+                    <div class="form-group endtime" hidden>
+                        <label class="col-md-3 col-xs-12 control-label">End Time：</label>
+                        <div class="col-md-6 col-xs-12">
+                            <input type='text' class="form-control" name="end_time" id='datetimepicker1'/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <label>End Time：</label>
-                    <!--指定 date标记-->
-                    <div class='input-group date'>
-                        <input type='text' class="form-control" id='datetimepicker1'hidden/>
-                        <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-                    </div>
+                <div class="panel-footer">
+                    <button type="submit"  class="btn btn-sm btn-info btn-default submitform">Commit</button>
                 </div>
             </div>
-
-        </div>
-
+        </form>
     </div>
+
 
 
     <!--fen ye-->
@@ -68,10 +67,10 @@
                 locale: moment.locale('en'),
                 startDate: new Date(now_time + 24*4*60*60*1000),
                 minView: 1,
-                autoclose: true,
+                autoclose: true
             });
             picker.on('changeDate', function (e) {
-                $('#datetimepicker1').attr("hidden", false);
+                $('.endtime').attr("hidden", false);
                 var pick_time = timestampToTime(e.date);
                 $('#datetimepicker1').datetimepicker('setStartDate',e.date);
                 $('#datetimepicker1').datetimepicker('setEndDate',new Date(Date.parse(pick_time) + 15*60*60*1000));
@@ -86,5 +85,6 @@
                 return Y+M+D;
             }
         });
+
     </script>
 @endsection

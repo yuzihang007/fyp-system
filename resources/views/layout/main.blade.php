@@ -25,8 +25,8 @@
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
-    <script src="{{ asset('js/owner.js') }}" defer ></script>
-    <script src="{{ asset('js/hire.js') }}" defer ></script>
+    <script src="{{ asset('js/owner.js') }}" ></script>
+    <script src="{{ asset('js/hire.js') }}" ></script>
     <script src="{{ asset('layer/layer.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datetimepicker.js') }}"></script>

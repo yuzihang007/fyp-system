@@ -12,7 +12,7 @@
 
     <div class="col-md-12">
 
-        <form class="form-horizontal" method="post" action="{{route('save.time.allocate',['type' => 0])}}">
+        <form class="form-horizontal" method="post" action="{{route('save.time.allocate',['type' => 1])}}">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="card-header bg-primary text-white">List of project title</div>
@@ -44,7 +44,7 @@
 
     <!--fen ye-->
     <div class="pagination justify-content-end">
-{{--        {{$list->render()}}--}}
+        {{--        {{$list->render()}}--}}
 
     </div>
 @stop
