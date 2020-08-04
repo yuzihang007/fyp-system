@@ -39,34 +39,70 @@ class TimeAllocate extends Command
      */
     public function handle()
     {
+
         $allocate_time = Carbon::now()->addDay(3)->toDateString();
-        list($t1,$t2,$t3) = getDiffDateRange(Carbon::now()->addDay(1),$allocate_time);
+        $timeList = getDiffDateRange(Carbon::now()->addDay(1),$allocate_time);
 
         $data = DB::table('_log_time_allocate as a')->leftJoin('users as b', function ($join){
             $join->on('a.user_id','=','b.id');
-        })->where('a.start_time','>=',Carbon::now())->where('a.end_time','<=', $allocate_time)->get();
+        })->where('a.created_at','>=',Carbon::now())->where('a.created_at','<=', $allocate_time)->get();
 
-        // t1
-        $this->FormatData($data, $t1);
+        // t1-3
 
+        foreach ($timeList as $t){
+            $this->FormatData($data, $t);
+        }
 
-        // t2
-        $this->FormatData($data, $t2);
+    }
 
+    // Calculate the one with the shortest conflict time
+    public function FormatData($data, $t)
+    {
+        $this->getStudentsTime($data,$t);
+        $this->getEvaluatorsTime($data,$t);
+    }
 
-        /// t3
-        $this->FormatData($data, $t3);
-
+    public function getTeacherTime($data, $t)
+    {
+        // Priority is calculated based on the teacher’s time
+        $list = $data->where('a.role',5)->where('a.type', 0)->where('a.start_time', $t);
 
 
     }
 
-    public function FormatData($data, $t1)
+    public function getStudentsTime($data, $t)
     {
-        $student = $data->where('a.role',4)->where('a.start_time', $t1);
-        $teacher = $data->where('a.role',5)->where('a.start_time', $t1)->where('a.type', 0);
-        $assess = $data->where('a.role',5)->where('a.start_time', $t1)->where('a.type', 1);
+        $student = $data->where('role',4)->where('start_time', $t)->groupBy('user_id')->map(function ($value) {
+            $timePool = collect([]);
+            foreach ($value as $val){
+                $count = Carbon::parse($val->start_time)->diffInHours($val->end_time);
+                for ($i=0;$i<$count+1;$i++){
+                    $use_time = Carbon::parse($val->start_time)->addHours($i)->rawFormat('H');
+                    $timePool->push($use_time);
+                }
+            }
+            return $timePool;
+        });
 
+
+        return $student;
+    }
+
+    public function getEvaluatorsTime($data, $t)
+    {
+        $evaluators = $data->where('role',5)->where('start_time', $t)->groupBy('user_id')->map(function ($value) {
+            $timePool = collect([]);
+            foreach ($value as $val){
+                $count = Carbon::parse($val->start_time)->diffInHours($val->end_time);
+                for ($i=0;$i<$count+1;$i++){
+                    $use_time = Carbon::parse($val->start_time)->addHours($i)->rawFormat('H');
+                    $timePool->push($use_time);
+                }
+            }
+            return $timePool;
+        });
+
+        return $evaluators;
     }
 
     public function RecommendAllocationTime($id)
