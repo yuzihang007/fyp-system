@@ -16,7 +16,7 @@
 
     <!-- CSS only -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.css') }}">
 {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 
     <!-- JS, Popper.js, and jQuery -->
@@ -29,7 +29,7 @@
     <script src="{{ asset('js/hire.js') }}" defer ></script>
     <script src="{{ asset('layer/layer.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.js') }}"></script>
 
 
 

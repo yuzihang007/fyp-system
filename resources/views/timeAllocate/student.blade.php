@@ -51,63 +51,88 @@
 
 @section('js')
     <script>
-        // $(function () {
-        //     $('#datetimepicker1').datetimepicker({
-        //         format: 'YYYY-MM-DD',
-        //         locale: moment.locale('zh-cn')
-        //     });
-        //     $('#datetimepicker2').datetimepicker({
-        //         format: 'YYYY-MM-DD HH:mm',
-        //         locale: moment.locale('zh-cn')
-        //     });
-        // });
-        function initDateTimePicker(startTime, endTime, timeFormat, minview) {
-            $(startTime).datetimepicker("remove");
-            $(startTime).datetimepicker({
-                language: sessionStorage.getItem("lang"),
-                autoclose: true,
-                todayHighlight: true,
-                endDate: new Date(),
-                format: timeFormat,
-                startView: minview,
-                minView: minview,
-            }).on("changeDate", function() {
-                var value = $(startTime).val();
-                $(endTime).datetimepicker("remove");
-                $(endTime).datetimepicker({
-                    language: sessionStorage.getItem("lang"),
-                    autoclose: true,
-                    todayHighlight: true,
-                    endDate: new Date(),
-                    startDate: value,
-                    format: timeFormat,
-                    startView: minview,
-                    minView: minview,
-                })
+        $(function () {
+            var now_time = new Date(new Date().toLocaleDateString()).getTime();
+            console.log(now_time);
+            $('#datetimepicker1').datetimepicker({
+                fontAwesome:'font-awesome',
+                format: 'yyyy-mm-dd hh:ii',
+                locale: moment.locale('en'),
+                minView: 1,
+                autoclose: true
             });
-            $(endTime).datetimepicker("remove");
-            $(endTime).datetimepicker({
-                language: sessionStorage.getItem("lang"),
-                autoclose: true,
-                todayHighlight: true,
-                endDate: new Date(),
-                format: timeFormat,
-                startView: minview,
-                minView: minview,
-            }).on("changeDate", function() {
-                var value = $(endTime).val();
-                $(startTime).datetimepicker("remove");
-                $(startTime).datetimepicker({
-                    language: sessionStorage.getItem("lang"),
-                    autoclose: true,
-                    todayHighlight: true,
-                    endDate: value,
-                    format: timeFormat,
-                    startView: minview,
-                    minView: minview,
-                })
+            var picker = $('#datetimepicker2').datetimepicker({
+                fontAwesome:'font-awesome',
+                format: 'yyyy-mm-dd hh:ii',
+                locale: moment.locale('en'),
+                startDate: new Date(now_time + 24*4*60*60*1000),
+                minView: 1,
+                autoclose: true
             });
-        }
+            picker.on('changeDate', function (e) {
+                var pick_time = timestampToTime(e.date);
+                $('#datetimepicker1').datetimepicker('setStartDate',e.date);
+                $('#datetimepicker1').datetimepicker('setEndDate',new Date(Date.parse(pick_time) + 15*60*60*1000));
+
+            });
+
+            function timestampToTime(value){
+                var date=new Date(value);
+                var Y= date.getFullYear() + '-';
+                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                var D = (date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate());
+                return Y+M+D;
+            }
+        });
+
+
+        // function initDateTimePicker(startTime, endTime, timeFormat, minview) {
+        //     $(startTime).datetimepicker("remove");
+        //     $(startTime).datetimepicker({
+        //         language: sessionStorage.getItem("lang"),
+        //         autoclose: true,
+        //         todayHighlight: true,
+        //         endDate: new Date(),
+        //         format: timeFormat,
+        //         startView: minview,
+        //         minView: minview,
+        //     }).on("changeDate", function() {
+        //         var value = $(startTime).val();
+        //         $(endTime).datetimepicker("remove");
+        //         $(endTime).datetimepicker({
+        //             language: sessionStorage.getItem("lang"),
+        //             autoclose: true,
+        //             todayHighlight: true,
+        //             endDate: new Date(),
+        //             startDate: value,
+        //             format: timeFormat,
+        //             startView: minview,
+        //             minView: minview,
+        //         })
+        //     });
+        //     $(endTime).datetimepicker("remove");
+        //     $(endTime).datetimepicker({
+        //         language: sessionStorage.getItem("lang"),
+        //         autoclose: true,
+        //         todayHighlight: true,
+        //         endDate: new Date(),
+        //         format: timeFormat,
+        //         startView: minview,
+        //         minView: minview,
+        //     }).on("changeDate", function() {
+        //         var value = $(endTime).val();
+        //         $(startTime).datetimepicker("remove");
+        //         $(startTime).datetimepicker({
+        //             language: sessionStorage.getItem("lang"),
+        //             autoclose: true,
+        //             todayHighlight: true,
+        //             endDate: value,
+        //             format: timeFormat,
+        //             startView: minview,
+        //             minView: minview,
+        //         })
+        //     });
+        // }
 
         /*4.17版本一些可能用得到的方法参数*/
         /*
