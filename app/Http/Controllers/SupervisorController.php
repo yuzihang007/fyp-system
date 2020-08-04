@@ -126,18 +126,16 @@ class SupervisorController extends Controller
 
 
     //学生申请列表
-    public function applicationIndex(ApplicationStudent $applicationStudent)
+    public function applicationIndex()
     {
-        $data = DB::table('application_student')
-            ->leftJoin('titles','application_student.title_id','=','titles.id')
-            ->join('students','students.user_id','=','application_student.user_id')
-            ->where('titles.user_id','=',Auth::id())
-            ->get();
-//
-//return view('supervisor.applicationList',compact('data'));
-        $applicationStudents= ApplicationStudent::paginate(4);
-//
-        return view('supervisor.applicationList',compact('applicationStudents','data'));
+        $list = DB::table('application_student as a')->leftJoin('titles as b',function ($join) {
+            $join->on('a.title_id','=','b.id');
+        })->leftJoin('users as c', function ($join) {
+            $join->on('a.user_id','=','c.id');
+        })->where('b.user_id',Auth::id())->select(['c.username','c.email','b.topic_id','b.project_title as title',
+            'a.preferenceOrder as choice_order','a.id','a.student_number','a.allocation_status','a.supervisor_mark_student','b.suitable_for'])->paginate(4);
+
+        return view('supervisor.applicationList',compact('list'));
     }
 
 
@@ -149,9 +147,10 @@ class SupervisorController extends Controller
 
             'supervisorMarkStudent'=>'required|in:-2,-1,0,1,2',
         ]);
-        $applicationStudent->supervisorMarkStudent = request('supervisorMarkStudent');
+        $applicationStudent->supervisor_mark_student = request('supervisorMarkStudent');
         $applicationStudent->save();
-        return redirect('/');
+
+        return redirect()->back();
     }
 
     //supervisor hire
@@ -162,10 +161,10 @@ class SupervisorController extends Controller
             'allocationStatus'=>'required|in:0,1',
         ]);
 
-        $applicationStudent->allocationStatus = request('allocationStatus');
+        $applicationStudent->allocation_status = request('allocationStatus');
         $applicationStudent->save();
 
-        return redirect('moduleOwner.titleList',compact('titles'));
+        return success();
     }
 
 

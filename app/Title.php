@@ -76,7 +76,7 @@ class Title extends Model
 
     public function titleSelections()
     {
-        return $this -> hasMany(ApplicationStudent::class);
+        return $this->hasOne(ApplicationStudent::class);
     }
 
 
@@ -91,5 +91,9 @@ class Title extends Model
     public function getAuditStatusAttribute()
     {
         return ['-1' => 'Fail', '0' => 'Wait', '1' => 'Pass'][$this->status] ?? 'Error';
+    }
+    public function getChoiceNumberAttribute()
+    {
+        return ['0' => 'None' ,1 => 'First', 2 => 'Second', 3 => 'Third'][$this->titleSelections->preferenceOrder ?? 0];
     }
 }

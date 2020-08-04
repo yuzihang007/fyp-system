@@ -110,7 +110,10 @@ Route::group(['middleware'=>['student','auth']],function(){
     //TODO:student route
     Route::post('/student/myApplication','StudentController@application');
     //topic select
-    Route::post('/title/{title}/select','StudentController@titleSelect');
+    Route::post('/title/select','StudentController@titleSelect')->name('student.title.select');
+
+
+    Route::get('/time_allocate/index','DefenseTimeAllocateController@studentIndex')->name('student.time.allocate');
 
 
 });
@@ -136,7 +139,29 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
     Route::get('/title/waitForVetting','ModuleOwnerController@waitForVetting')->name('module.wait.vetting');
     Route::get('/title/passForVetting','ModuleOwnerController@passForVetting')->name('module.pass.vetting');
     Route::get('/title/refuseForVetting','ModuleOwnerController@refuseForVetting')->name('module.refuse.vetting');
+
+    Route::get('/moduleOwner/student_apply','ModuleOwnerController@applyStudentList')->name('module.student.apply');
+    Route::get('/moduleOwner/wait_allocate','ModuleOwnerController@waitAllocateStudent')->name('module.student.wait_allocate');
 });
+
+    Route::group(['middleware'=>['moduleOwner','auth']],function(){
+
+        //homepage
+        Route::get('moduleOwner/home','ModuleOwnerController@home' );
+
+        // supervisor title list
+        Route::get('/moduleOwner/vettingList','ModuleOwnerController@vettingList')->name('module.adjust.list');
+
+        // change the vetting status of title
+        Route::post('/title/{title}/status','ModuleOwnerController@vetting');
+        //
+        Route::get('/title/waitForVetting','ModuleOwnerController@waitForVetting')->name('module.wait.vetting');
+        Route::get('/title/passForVetting','ModuleOwnerController@passForVetting')->name('module.pass.vetting');
+        Route::get('/title/refuseForVetting','ModuleOwnerController@refuseForVetting')->name('module.refuse.vetting');
+
+        Route::get('/moduleOwner/student_apply','ModuleOwnerController@applyStudentList')->name('module.student.apply');
+        Route::get('/moduleOwner/wait_allocate','ModuleOwnerController@waitAllocateStudent')->name('module.student.wait_allocate');
+    });
 
     Route::any('/application/{applicationStudent}/mark','SupervisorController@markStudent');
     Route::post('/application/{applicationStudent}/status','SupervisorController@hire');

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Title;
-use App\User;
 
-use http\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ModuleOwnerController extends Controller
 {
@@ -70,5 +70,33 @@ class ModuleOwnerController extends Controller
         })->where('status',-1)->paginate(8);
 
         return view('moduleOwner.title.refuse',compact('list'));
+    }
+
+    public function applyStudentList()
+    {
+        $list = DB::table('application_student as a')->leftJoin('titles as b',function ($join) {
+            $join->on('a.title_id','=','b.id');
+        })->leftJoin('users as c', function ($join) {
+            $join->on('a.user_id','=','c.id');
+        })->select(['c.username','c.email','b.topic_id','b.project_title as title',
+            'a.preferenceOrder as choice_order','a.id','a.student_number','a.allocation_status','a.supervisor_mark_student','b.suitable_for'])->paginate(4);
+
+        return view('moduleOwner.apply.index', compact('list'));
+    }
+
+    public function waitAllocateStudent()
+    {
+        $students = DB::table('application_student')->where('allocation_status', 1)->get()->pluck('user_id')->flatten()->unique();
+
+        $list = DB::table('application_student as a')->leftJoin('titles as b',function ($join) {
+            $join->on('a.title_id','=','b.id');
+        })->leftJoin('users as c', function ($join) {
+            $join->on('a.user_id','=','c.id');
+        })->select(['c.username','c.email','b.topic_id','b.project_title as title',
+            'a.preferenceOrder as choice_order','a.id','a.student_number','a.allocation_status','a.supervisor_mark_student','b.suitable_for'])->when($students->count(), function ($query) use($students){
+            $query->whereNotIn('a.user_id', $students);
+        })->paginate(4);
+
+        return view('moduleOwner.apply.wait', compact('list'));
     }
 }
