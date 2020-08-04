@@ -122,6 +122,8 @@ Route::group(['middleware'=>['student','auth']],function(){
 Route::group(['middleware'=>['assessor','auth']],function(){
     //homepage
     Route::get('assessor/home','AssessorController@home' );
+    Route::get('assessor/time_allocate/index','DefenseTimeAllocateController@assessorIndex')->name('assessor.time.allocate');
+
 });
 
 
@@ -142,6 +144,9 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
 
     Route::get('/moduleOwner/student_apply','ModuleOwnerController@applyStudentList')->name('module.student.apply');
     Route::get('/moduleOwner/wait_allocate','ModuleOwnerController@waitAllocateStudent')->name('module.student.wait_allocate');
+
+    Route::get('/moduleOwner/time_allocate/index','DefenseTimeAllocateController@moduleOwnerIndex')->name('moduleOwner.time.allocate');
+
 });
 
     Route::group(['middleware'=>['moduleOwner','auth']],function(){
@@ -197,6 +202,13 @@ Route::group(['middleware'=>['moduleOwner','auth']],function(){
     //profile ：教师profile详情页面
     Route::get('supervisor/profile/{id}','UserController@supervisorProfile');
     Route::get('supervisor/profile/edit','UserController@supervisorProfileEdit');
+
+    Route::get('supervisor/time_allocate/index','DefenseTimeAllocateController@teacherIndex')->name('supervisor.time.allocate');
+
+    // save
+    Route::post('time_allocate/save','DefenseTimeAllocateController@setUseTime')->name('save.time.allocate');
+
+
 //
 ////profile 创建页面 TODO:
 //    Route::get('/user/create','UserController@list');
